@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 scaleChangeB, positionChangeB;
     public bool isSmall = false;
     private Vector3 scaleChangeS, positionChangeS;
+    public bool isFlying = false;
+    float flightSpeed = 0.1f;
 
     private Rigidbody rb;
 
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
             
             isBig = true;
             isSmall = false;
+            isFlying = false;
             
             walkSpeed = 3f;
             jumpSpeed = 1f;
@@ -60,7 +63,11 @@ public class PlayerController : MonoBehaviour
                 scaleChangeS = new Vector3(-3f, -3f, -3f);
                 this.gameObject.transform.localScale += scaleChangeS;
                 isBig = false;
-                print("I smol");
+            }
+            if(isSmall==true)
+            {
+                scaleChangeS = new Vector3(0f, 0f, 0f);
+                this.gameObject.transform.localScale += scaleChangeS;
             }
             else
             {
@@ -69,12 +76,28 @@ public class PlayerController : MonoBehaviour
                 isBig = false;
             }
             isBig = false;
+            isFlying = false;
             isSmall = true;
             
             //scaleChangeS = new Vector3(-0.5f, -0.5f, -0.5f);
             //this.gameObject.transform.localScale += scaleChangeS;
             walkSpeed = 15f;
             jumpSpeed = 2f;
+        }
+        if(other.gameObject.CompareTag("Fly"))
+        {
+            isFlying = true;
+            if (isBig == true)
+            {
+                scaleChangeS = new Vector3(-3f, -3f, -3f);
+                this.gameObject.transform.localScale += scaleChangeS;
+                isBig = false;
+            }
+            if (isSmall == true)
+            {
+                scaleChangeS = new Vector3(0.5f, 0.5f, 0.5f);
+                this.gameObject.transform.localScale += scaleChangeS;
+            }
         }
     }
 
@@ -101,6 +124,10 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
         }
 
+        if(Input.GetKey(KeyCode.Space)&&isFlying)
+        {
+            rb.AddForce(jump * flightSpeed, ForceMode.Impulse);
+        }
     }
 
     private void FixedUpdate()
