@@ -6,9 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Basic Movement")]
     float walkSpeed = 10f;
-    float jumpSpeed = 2f; //add variance for up vs down at some point
+    float jumpSpeed = 2f; 
     public bool isAbleToMove = true;
-    private Vector3 prevPos;
     private Vector3 jump;
 
     public bool isGrounded = false;
@@ -20,8 +19,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 scaleChangeS, positionChangeS;
     public bool isFlying = false;
     float flightSpeed = 0.1f;
+    public bool isExplosive = false;
 
     private Rigidbody rb;
+    public Rigidbody projectile;
 
     void Start()
     {
@@ -53,7 +54,8 @@ private void OnTriggerEnter(Collider other)
             isBig = true;
             isSmall = false;
             isFlying = false;
-            
+            isExplosive = false;
+
             walkSpeed = 3f;
             jumpSpeed = 1f;
         }
@@ -80,6 +82,7 @@ private void OnTriggerEnter(Collider other)
             }
             isBig = false;
             isFlying = false;
+            isExplosive = false;
             isSmall = true;
             
             walkSpeed = 15f;
@@ -90,6 +93,7 @@ private void OnTriggerEnter(Collider other)
             isFlying = true;
             transform.position = transform.position + new Vector3(0f, 1f, 0f);
             isAbleToMove = false;
+            isExplosive = false;
             if (isBig == true)
             {
                 scaleChangeS = new Vector3(-3f, -3f, -3f);
@@ -113,7 +117,31 @@ private void OnTriggerEnter(Collider other)
                 print("moving");
                 isAbleToMove = true;
             }
+        }
+        if(other.gameObject.CompareTag("Explode"))
+        {
+            isExplosive = true;
+            print("bang");
 
+            if (isBig == true)
+            {
+                scaleChangeS = new Vector3(-3f, -3f, -3f);
+                this.gameObject.transform.localScale += scaleChangeS;
+                isBig = false;
+            }
+            if (isSmall == true)
+            {
+                scaleChangeS = new Vector3(0.5f, 0.5f, 0.5f);
+                this.gameObject.transform.localScale += scaleChangeS;
+                isSmall = false;
+            }
+
+            walkSpeed = 10f;
+            jumpSpeed = 2f;
+
+            isFlying = false;
+            isSmall = false;
+            isBig = false;
         }
     }
 
@@ -131,7 +159,7 @@ private void OnTriggerEnter(Collider other)
             Vector3 moveDirection = new Vector3(xDirection, 0f, 0f);
             transform.position += moveDirection * walkSpeed * Time.deltaTime;
         }
-        if (isAbleToMove == false)
+        if (isAbleToMove == false)//this is scuffed, think of a better way
         {
             float xDirection = Input.GetAxis("Horizontal");
             Vector3 moveDirection = new Vector3(xDirection, 0f, 0f);
@@ -139,27 +167,23 @@ private void OnTriggerEnter(Collider other)
         }
         if (isFlying == true&&isGrounded==false)
         {
-            print("fly you fuck");
             float xDirection = Input.GetAxis("Horizontal");
             Vector3 moveDirection = new Vector3(xDirection, 0f, 0f);
             transform.position += moveDirection * walkSpeed * Time.deltaTime;
         }
 
-        /*
-        if (transform.hasChanged)
-        {
-            isMoving = true;
-            transform.hasChanged = false;
-        }
-        else
-        {
-            isMoving = false;
-        }
-        */
-
         if (Input.GetKey(KeyCode.Space)&&isFlying)
         {
             rb.AddForce(jump * flightSpeed, ForceMode.Impulse);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q)&&isExplosive==true)
+        {
+            print("le bang");
+            Rigidbody clone;
+            clone = Instantiate(projectile, transform.position, transform.rotation);
+            //clone.velocity = transform.TransformDirection(Vector3.left * 20);
+            clone.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,100,0));
         }
     }
 
