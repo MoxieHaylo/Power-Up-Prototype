@@ -8,7 +8,6 @@ public class DeleteSelf : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            print("lol I'm dead");
             Destroy(this.gameObject);
         }
     }
@@ -17,7 +16,6 @@ public class DeleteSelf : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            print("lol I'm dead");
             Destroy(this.gameObject);
         }
     }

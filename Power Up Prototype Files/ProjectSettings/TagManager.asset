@@ -8,6 +8,10 @@ TagManager:
   - Big
   - Small
   - Fly
+  - Explode
+  - Projectile
+  - Shrapnel
+  - Destructable
   layers:
   - Default
   - TransparentFX
