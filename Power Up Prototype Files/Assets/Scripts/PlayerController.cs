@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
             {
                 scaleChangeB = new Vector3(3f, 3f, 3f);
                 this.gameObject.transform.localScale += scaleChangeB;
-                print("Biggy");
+                print("I am big and heavy so I can't jump high");
             }
             
             isBig = true;
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         if(
             other.gameObject.CompareTag("Small"))
         {
+            print("I am small and speedy");
             isAbleToMove = true;
             if (isBig==true)
             {
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Fly"))
         {
+            print("I belive I can fly");
             isFlying = true;
             transform.position = transform.position + new Vector3(0f, 1f, 0f);
             isAbleToMove = false;
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
             }
             if (isFlying == true && isGrounded == true)
             {
-                print("stuck");
+                print("I can't walk now");
                 isAbleToMove = false;
             }
 
@@ -121,7 +123,7 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.CompareTag("Explode"))
         {
             isExplosive = true;
-            print("bang");
+            print("I can now make things go boom");
 
             if (isBig == true)
             {
@@ -149,7 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            print("I'm dead now bye");
+            print("Power Up consumed");
         }
     }
 
