@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Big"))
         {
@@ -145,6 +145,13 @@ private void OnTriggerEnter(Collider other)
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            print("I'm dead now bye");
+        }
+    }
 
     void Update()
     {

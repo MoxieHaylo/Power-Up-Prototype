@@ -14,7 +14,7 @@ public class Shrapnel : MonoBehaviour
         while(true)
         {
             print("I exploded");
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(0.5f);
             print("And now I clean");
             Destroy(this.gameObject);
             yield break;
