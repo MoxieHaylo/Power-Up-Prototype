@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
             isAbleToMove = true;
             if (isBig==false)
             {
+                this.gameObject.transform.position += Vector3.up * 1.5f;
                 scaleChangeB = new Vector3(3f, 3f, 3f);
                 this.gameObject.transform.localScale += scaleChangeB;
                 print("I am big and heavy so I can't jump high");
