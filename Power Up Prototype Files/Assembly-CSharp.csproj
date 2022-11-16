@@ -53,13 +53,13 @@
     <UnityVersion>2020.3.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PressurePlate.cs" />
+    <Compile Include="Assets\Scripts\PressurePlate0.cs" />
     <Compile Include="Assets\Scripts\DestructableObjects.cs" />
+    <Compile Include="Assets\Scripts\MovingPlatform0.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ThingGoBang.cs" />
     <Compile Include="Assets\Scripts\DeleteSelf.cs" />
     <Compile Include="Assets\Scripts\Shrapnel.cs" />
-    <Compile Include="Assets\Scripts\MovingPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

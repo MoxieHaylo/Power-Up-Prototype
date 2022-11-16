@@ -1872,7 +1872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pPlate: {fileID: 556045392}
-  positionToMoveTo: {x: 0, y: 2, z: 0}
+  positionToMoveTo: {x: 6, y: 3, z: 0}
 --- !u!65 &2143504997
 BoxCollider:
   m_ObjectHideFlags: 0
