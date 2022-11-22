@@ -30,4 +30,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
+    public void GoToCredits()
+    {
+        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+    }
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Title", LoadSceneMode.Single);
+    }
 }
